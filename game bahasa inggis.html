@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Belajar Bahasa Inggris - Kelas 2 SD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .card {
+            background: white;
+            width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        button {
+            margin: 8px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #3498db;
+            color: white;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        #result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .share {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎮 Game Belajar Bahasa Inggris 🎮</h1>
+    <p>Kelas 2 Sekolah Dasar</p>
+
+    <!-- 🔗 LINK SHARE -->
+    <div class="share">
+        📎 Link Game (Share):
+        <br>
+        <a href="https://gilvianadianto09-cell.github.io/game-bahasa-inggris-kelas-2/" target="_blank">
+            https://gilvianadianto09-cell.github.io/game-bahasa-inggris-kelas-2/
+        </a>
+    </div>
+
+    <div class="card">
+        <h2 id="question">Apa arti kata: <b>CAT</b>?</h2>
+        <button onclick="checkAnswer('Kucing')">Kucing</button>
+        <button onclick="checkAnswer('Anjing')">Anjing</button>
+        <button onclick="checkAnswer('Burung')">Burung</button>
+        <p id="result"></p>
+        <button onclick="nextQuestion()">Soal Berikutnya</button>
+    </div>
+
+    <script>
+        const questions = [
+            { word: "CAT", correct: "Kucing", options: ["Kucing", "Anjing", "Burung"] },
+            { word: "DOG", correct: "Anjing", options: ["Kucing", "Anjing", "Ikan"] },
+            { word: "APPLE", correct: "Apel", options: ["Apel", "Jeruk", "Pisang"] },
+            { word: "BOOK", correct: "Buku", options: ["Meja", "Buku", "Pensil"] }
+        ];
+
+        let index = 0;
+
+        function loadQuestion() {
+            const q = questions[index];
+            document.getElementById("question").innerHTML =
+                `Apa arti kata: <b>${q.word}</b>?`;
+
+            const buttons = document.querySelectorAll(".card button");
+            for (let i = 0; i < 3; i++) {
+                buttons[i].innerText = q.options[i];
+                buttons[i].setAttribute(
+                    "onclick",
+                    `checkAnswer('${q.options[i]}')`
+                );
+            }
+            document.getElementById("result").innerText = "";
+        }
+
+        function checkAnswer(answer) {
+            const result = document.getElementById("result");
+            if (answer === questions[index].correct) {
+                result.innerText = "✅ Jawaban Benar!";
+                result.style.color = "green";
+            } else {
+                result.innerText = "❌ Jawaban Salah, coba lagi.";
+                result.style.color = "red";
+            }
+        }
+
+        function nextQuestion() {
+            index++;
+            if (index >= questions.length) {
+                index = 0;
+                alert("🎉 Permainan selesai! Ulangi lagi ya.");
+            }
+            loadQuestion();
+        }
+    </script>
+
+</body>
+</html>
